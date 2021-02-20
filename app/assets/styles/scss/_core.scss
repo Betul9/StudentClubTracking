@@ -1,0 +1,48 @@
+body {
+  @include bgcolor(bg);
+  * {
+    box-sizing: border-box;
+  }
+}
+input, button, ul, ol, li {
+  all: unset;
+}
+li {
+  display: block;
+}
+button {
+  @include click();
+}
+input {
+  cursor: text;
+}
+a {
+  all: unset;
+  @include click();
+}
+.scrollbar {
+  overflow: auto;
+  @include scrollbar();
+}
+.scrollbar-x {
+  overflow-x: auto;
+  overflow-y: hidden;
+  @include scrollbar();
+}
+.scrollbar-y {
+  overflow-y: auto;
+  overflow-x: hidden;
+  @include scrollbar();
+}
+
+.container {
+  width: $container;
+  margin: 0 auto;
+  @include device(laptop, l) {
+    width: 100%;
+    padding: 0 20px;
+  }
+  &-fluid {
+    width: 100%;
+  }
+}

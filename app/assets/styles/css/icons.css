@@ -1,0 +1,72 @@
+@font-face {
+  font-family: 'events';
+  src:  url('../../fonts/events.eot?tdogdc');
+  src:  url('../../fonts/events.eot?tdogdc#iefix') format('embedded-opentype'),
+  url('../../fonts/events.ttf?tdogdc') format('truetype'),
+  url('../../fonts/events.woff?tdogdc') format('woff'),
+  url('../../fonts/events.svg?tdogdc#events') format('svg');
+  font-weight: normal;
+  font-style: normal;
+  font-display: block;
+}
+
+[class^="eicon-"], [class*=" eicon-"] {
+  /* use !important to prevent issues with browser extensions that change fonts */
+  font-family: 'events' !important;
+  speak: never;
+  font-style: normal;
+  font-weight: normal;
+  font-variant: normal;
+  text-transform: none;
+  line-height: 1;
+
+  /* Better Font Rendering =========== */
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+.eicon-filter:before {
+  content: "\e90e";
+}
+.eicon-check:before {
+  content: "\e90d";
+}
+.eicon-participation-form:before {
+  content: "\e90c";
+}
+.eicon-google-calendar:before {
+  content: "\e900";
+}
+.eicon-mini-arrow:before {
+  content: "\e901";
+}
+.eicon-people:before {
+  content: "\e902";
+}
+.eicon-search:before {
+  content: "\e903";
+}
+.eicon-share:before {
+  content: "\e904";
+}
+.eicon-ticket:before {
+  content: "\e905";
+}
+.eicon-date:before {
+  content: "\e906";
+}
+.eicon-featured:before {
+  content: "\e907";
+}
+.eicon-footer-facebook:before {
+  content: "\e908";
+}
+.eicon-footer-instagram:before {
+  content: "\e909";
+}
+.eicon-footer-linkedin:before {
+  content: "\e90a";
+}
+.eicon-footer-twitter:before {
+  content: "\e90b";
+}

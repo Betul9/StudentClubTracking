@@ -1,0 +1,8 @@
+@mixin hover($el: all) {
+  @if ($el != none) {
+    @include transition($el);
+  }
+  &:hover {
+    @content;
+  }
+}

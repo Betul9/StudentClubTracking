@@ -1,0 +1,3 @@
+@mixin minHeight($number: 100%) {
+    min-height: size-control($number)
+}

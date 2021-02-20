@@ -1,0 +1,18 @@
+@mixin absolute($top: false, $left: false, $right: false, $bottom: false, $zindex: false, $t: false, $l: false, $r: false, $b: false, $z : false){
+    position: absolute;
+    @if $top or $t {
+        top: size-control(select-non-false($top, $t));
+    }
+    @if $right or $r {
+        right: size-control(select-non-false($right, $r));
+    }
+    @if $bottom or $b {
+        bottom: size-control(select-non-false($bottom, $b));
+    }
+    @if $left or $l {
+        left: size-control(select-non-false($left, $l));
+    }
+    @if $zindex or $z {
+        z-index: z($z);
+    }
+}

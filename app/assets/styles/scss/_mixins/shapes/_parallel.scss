@@ -1,0 +1,5 @@
+@mixin parallel($width, $height, $deg){
+    width: size-control($width);
+    height: size-control($height);
+    transform: skew($deg+deg);
+}

@@ -1,0 +1,45 @@
+@mixin flex($ai: false, $jc: false) {
+  display: flex;
+  @if ($ai) {
+    align-items: $ai;
+  }
+  @if ($jc) {
+    justify-content: $jc;
+  }
+}
+@mixin flexFull() {
+  display: flex;
+  > div {
+    width: 100%;
+  }
+}
+@mixin flexDirection($direction) {
+  $param: row;
+  @if ($direction: c) {
+    $param: column;
+  } @else if ($direction: cr) {
+    $param: column-reverse;
+  } @else if ($direction: r) {
+    $param: row;
+  } @else if ($direction: rr) {
+    $param: row-reverse
+  }
+  flex-direction: $param;
+}
+@mixin flexGap ($margin, $position: r) {
+  @if ($position == 'r') {
+    & {
+      margin-right: size-control($margin);
+      &:last-child {
+        margin-right: 0;
+      }
+    }
+  } @else {
+    & {
+      margin-right: size-control($margin);
+      &:first-child {
+        margin-right: 0;
+      }
+    }
+  }
+}

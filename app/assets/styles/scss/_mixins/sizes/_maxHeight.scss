@@ -1,0 +1,3 @@
+@mixin maxHeight($number: 100%) {
+    max-height: size-control($number)
+}

@@ -1,0 +1,23 @@
+@function is-number($value) {
+  @return type-of($value) == 'number';
+}
+@function is-integer($value) {
+  @return is-number($value) and round($value) == $value;
+}
+@function is-percentage($value) {
+  @return is-number($value) and unit($value) == '%';
+}
+@function only-number($value){
+  @return index('cm' 'mm' 'in' 'px' 'pt' 'pc', unit($value)) == null
+}
+@function size-control($size, $ext: $measureType) {
+  @if(only-number($size) and is-percentage($size) == false) {
+    @if ($size == 0) {
+      @return $size;
+    } @else {
+      @return unquote($size + $ext);
+    }
+  } @else {
+    @return $size;
+  }
+}

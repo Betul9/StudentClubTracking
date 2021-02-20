@@ -1,0 +1,4 @@
+@mixin mx($number){
+    margin-left: size-control($number);
+    margin-right: size-control($number);
+}

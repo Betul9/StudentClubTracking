@@ -1,0 +1,4 @@
+@mixin py($number){
+    padding-top: size-control($number);
+    padding-bottom: size-control($number);
+}

@@ -1,0 +1,7 @@
+@mixin iblock(){
+    display: inline-block;
+    margin-right: -0.25em;
+    &:last-child {
+        @include mr(0)
+    }
+}

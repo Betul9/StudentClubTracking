@@ -1,0 +1,3 @@
+@mixin pr($number){
+    padding-right: size-control($number);
+}

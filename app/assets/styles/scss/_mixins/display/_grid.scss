@@ -1,0 +1,30 @@
+@mixin ___helperGridMixin($displayType, $columns, $gap: 0, $ai: false, $jc: false) {
+  @if (is-number($columns)) {
+    $columns: repeat($columns, 1fr);
+  }
+  @if ($ai != false) {
+    align-items: $ai;
+  }
+  @if ($jc != false) {
+    align-items: $jc;
+  }
+  display: $displayType;
+  grid-template-columns: $columns;
+  @if ($gap != 0) {
+    grid-gap: size-control($gap);
+  }
+}
+
+@mixin grid($columns, $gap: 0, $ai: false, $jc: false) {
+  @include ___helperGridMixin(grid, $columns, $gap, $ai, $jc)
+};
+@mixin iGrid($columns, $gap: 0, $ai: false, $jc: false) {
+  @include ___helperGridMixin(inline-grid, $columns, $gap, $ai, $jc)
+};
+@mixin gridGap($gap) {
+  grid-gap: size-control($gap);
+}
+@mixin gridCenter() {
+  justify-content: center;
+  align-items: center;
+}

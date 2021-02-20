@@ -1,0 +1,5 @@
+@mixin oval($width, $height) {
+    width: size-control($width);
+    height: size-control($height);
+    @include brad(all, 50%);
+}

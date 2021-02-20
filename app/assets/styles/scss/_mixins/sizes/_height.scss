@@ -1,0 +1,3 @@
+@mixin height($number: 100%) {
+    height: size-control($number)
+}

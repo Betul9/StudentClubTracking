@@ -1,0 +1,39 @@
+@mixin trapezoid($direction, $backgroundColor, $bottomWidth, $topWidth, $height) {
+    $inward: ($bottomWidth - $topWidth)/2;
+    @if $direction == up {
+        width: size-control($bottomWidth - $inward*2);
+        height: 0;
+        @include border(
+                                (0, $inward, $height, $inward),
+                                (transparent, transparent, $backgroundColor, transparent),
+                        solid
+        );
+    }
+    @else if $direction == right {
+        width: 0;
+        height: size-control($bottomWidth - $inward*2);
+        @include border(
+                                ($inward, 0, $inward, $height),
+                                (transparent, transparent, transparent, $backgroundColor),
+                        solid
+        );
+    }
+    @else if $direction == down {
+        width: size-control($bottomWidth - $inward*2);
+        height: 0;
+        @include border(
+                                ($height, $inward, 0, $inward),
+                                ($backgroundColor, transparent, transparent, transparent),
+                        solid
+        );
+    }
+    @else if $direction == left {
+        width: 0;
+        height: size-control($bottomWidth - $inward*2);
+        @include border(
+                                ($inward, $height, $inward, 0),
+                                (transparent, $backgroundColor, transparent, transparent),
+                        solid
+        );
+    }
+}

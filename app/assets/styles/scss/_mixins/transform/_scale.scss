@@ -1,0 +1,6 @@
+@mixin scale($rate) {
+    -webkit-transform: scale($rate);
+    -moz-transform: scale($rate);
+    -o-transform: scale($rate);
+    transform: scale($rate);
+}

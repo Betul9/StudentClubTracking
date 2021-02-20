@@ -1,0 +1,10 @@
+@mixin after($content: false) {
+    &:after {
+        @if $content {
+            content: $content;
+        } @else {
+            content: '';
+        }
+        @content;
+    }
+}

@@ -1,0 +1,14 @@
+@mixin scrollbar($width: 6) {
+  &::-webkit-scrollbar {
+    width: size-control($width);
+    @include brad($width / 2);
+  }
+  &::-webkit-scrollbar-track {
+    @include brad($width / 2);
+    background: var(--color-cloud);
+  }
+  &::-webkit-scrollbar-thumb {
+    @include brad($width / 2);
+    background: var(--color-main);
+  }
+}

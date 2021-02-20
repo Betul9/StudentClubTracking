@@ -1,0 +1,48 @@
+@mixin diamond($backgroundColor, $size, $style : full) {
+    @include relative();
+    @if $style == full {
+        height: size-control($size);
+        &:before {
+            @include absolute((top: 0));
+            display: block;
+            content: '';
+            @include triangle(up, $backgroundColor, $size, $size/2);
+        }
+        &:after {
+            @include absolute((top: $size/2));
+            display: block;
+            content: '';
+            @include triangle(down, $backgroundColor, $size, $size/2);
+        }
+    }
+    @else if $style == cut {
+        height: size-control($size);
+        &:before {
+            @include absolute((top: 0));
+            display: block;
+            content: '';
+            @include trapezoid(up, $backgroundColor, $size, $size/2, $size/4);
+        }
+        &:after {
+            @include absolute((top: $size/4));
+            display: block;
+            content: '';
+            @include triangle(down, $backgroundColor, $size, $size*3/4);
+        }
+    }
+    @else if $style == cutSlim {
+        height: size-control($size*3/4);
+        &:before {
+            @include absolute((top: 0));
+            display: block;
+            content: '';
+            @include trapezoid(up, $backgroundColor, $size, $size/2, $size/4);
+        }
+        &:after {
+            @include absolute((top: $size/4));
+            display: block;
+            content: '';
+            @include triangle(down, $backgroundColor, $size, $size/2);
+        }
+    }
+}

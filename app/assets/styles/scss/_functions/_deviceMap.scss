@@ -1,0 +1,5 @@
+// device name
+@function dmap($key) {
+  $longKey: map-get($deviceKeys, $key);
+  @return map-get($devices, $longKey)
+}

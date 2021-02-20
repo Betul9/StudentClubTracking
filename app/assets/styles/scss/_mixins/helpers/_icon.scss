@@ -1,0 +1,8 @@
+@mixin icon($size: false, $color: false) {
+  @if ($size) {
+    font-size: size-control($size);
+  }
+  @if ($color) {
+    @include color($color);
+  }
+}

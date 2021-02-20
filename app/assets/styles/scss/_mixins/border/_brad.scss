@@ -1,0 +1,95 @@
+$border-radius: var(--border-radius);
+@mixin brad($radius: false) {
+  @if ($radius == false) {
+    $radius: $border-radius;
+  } @else {
+    $radius: size-control($radius);
+  }
+  -webkit-border-radius: $radius;
+  -moz-border-radius: $radius;
+  border-radius: $radius;
+}
+@mixin borderRadiusTopLeft($radius) {
+  $radius: size-control($radius);
+  -webkit-border-top-left-radius: $radius;
+  -moz-border-radius-topleft: $radius;
+  border-top-left-radius: $radius;
+}
+@mixin borderRadiusTopRight($radius) {
+  $radius: size-control($radius);
+  -webkit-border-top-right-radius: $radius;
+  -moz-border-radius-topright: $radius;
+  border-top-right-radius: $radius;
+}
+@mixin borderRadiusBottomLeft($radius) {
+  $radius: size-control($radius);
+  -webkit-border-bottom-left-radius: $radius;
+  -moz-border-radius-bottomleft: $radius;
+  border-bottom-left-radius: $radius;
+}
+@mixin borderRadiusBottomRight($radius: false) {
+  @if ($radius == false) {
+    $radius: $border-radius;
+  } @else {
+    $radius: size-control($radius);
+  }
+  -webkit-border-bottom-right-radius: $radius;
+  -moz-border-radius-bottomright: $radius;
+  border-bottom-right-radius: $radius;
+}
+@mixin borderRadius($corner: all, $radius: false) {
+  @if ($radius == false) {
+    $radius: $border-radius;
+  }
+  @if ($corner == top) {
+    @include borderRadiusTopLeft($radius);
+    @include borderRadiusTopRight($radius);
+    @include borderRadiusBottomLeft(0);
+    @include borderRadiusBottomRight(0);
+  }
+  @else if ($corner == right) {
+    @include borderRadiusTopLeft(0);
+    @include borderRadiusTopRight($radius);
+    @include borderRadiusBottomLeft(0);
+    @include borderRadiusBottomRight($radius);
+  }
+  @else if ($corner == bottom) {
+    @include borderRadiusTopLeft(0);
+    @include borderRadiusTopRight(0);
+    @include borderRadiusBottomLeft($radius);
+    @include borderRadiusBottomRight($radius);
+  }
+  @else if ($corner == left) {
+    @include borderRadiusTopLeft($radius);
+    @include borderRadiusTopRight(0);
+    @include borderRadiusBottomLeft($radius);
+    @include borderRadiusBottomRight(0);
+  }
+  @else if ($corner == all) {
+    @include brad($radius);
+  }
+  @else if ($corner == topLeft) {
+    @include borderRadiusTopLeft($radius);
+    @include borderRadiusTopRight(0);
+    @include borderRadiusBottomLeft(0);
+    @include borderRadiusBottomRight(0);
+  }
+  @else if ($corner == topRight) {
+    @include borderRadiusTopLeft(0);
+    @include borderRadiusTopRight($radius);
+    @include borderRadiusBottomLeft(0);
+    @include borderRadiusBottomRight(0);
+  }
+  @else if ($corner == bottomRight) {
+    @include borderRadiusTopLeft(0);
+    @include borderRadiusTopRight(0);
+    @include borderRadiusBottomLeft(0);
+    @include borderRadiusBottomRight($radius);
+  }
+  @else if ($corner == bottomLeft) {
+    @include borderRadiusTopLeft(0);
+    @include borderRadiusTopRight(0);
+    @include borderRadiusBottomLeft($radius);
+    @include borderRadiusBottomRight(0);
+  }
+}

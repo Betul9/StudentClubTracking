@@ -1,0 +1,27 @@
+@each $space in $spaces {
+  .f-gap-#{$space} {
+    > div {
+      margin-right: $space+$measureType;
+      &:last-child {
+        margin-right: 0;
+      }
+    }
+  }
+}
+@mixin flexGap ($margin, $position: r) {
+  @if ($position == 'r') {
+    & {
+      margin-right: size-control($margin);
+      &:last-child {
+        margin-right: 0;
+      }
+    }
+  } @else {
+    & {
+      margin-right: size-control($margin);
+      &:first-child {
+        margin-right: 0;
+      }
+    }
+  }
+}

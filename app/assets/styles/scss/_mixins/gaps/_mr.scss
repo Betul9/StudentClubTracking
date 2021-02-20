@@ -1,0 +1,3 @@
+@mixin mr($number){
+    margin-right: size-control($number);
+}

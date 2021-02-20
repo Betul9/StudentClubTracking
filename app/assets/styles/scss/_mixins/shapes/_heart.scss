@@ -1,0 +1,23 @@
+@mixin heart($backgroundColor, $size) {
+    @include relative();
+    width: size-control($size);
+    height: size-control($size*4.04/5);
+    &:before {
+        @include absolute((top: ($size*0.104), left: 0));
+        display: block;
+        content: '';
+        @include rectangle($size*3.96/5, $size/2);
+        @include brad(left, $size/2);
+        @include rotate(45);
+        @include bgcolor($backgroundColor);
+    }
+    &:after {
+        @include absolute((top: ($size*0.104), right: 0));
+        display: block;
+        content: '';
+        @include rectangle($size*3.96/5, $size/2);
+        @include brad(right, $size/2);
+        @include rotate(-45);
+        @include bgcolor($backgroundColor);
+    }
+}

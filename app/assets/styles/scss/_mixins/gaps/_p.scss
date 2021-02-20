@@ -1,0 +1,19 @@
+@mixin p($top, $right: false, $bottom: false, $left: false) {
+    @if $right == false {
+        @include pa($top);
+    }
+    @if $bottom == false {
+        @include py($top);
+        @include px($right);
+    }
+    @if $left == false {
+        @include pt($top);
+        @include pb($bottom);
+        @include px($right);
+    } @else {
+        @include pt($top);
+        @include pr($right);
+        @include pb($bottom);
+        @include pl($left);
+    }
+}

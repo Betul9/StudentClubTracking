@@ -1,0 +1,3 @@
+@mixin bgcolor($color, $opacity: 1) {
+    background-color: c($color, $opacity);
+}

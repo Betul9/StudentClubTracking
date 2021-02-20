@@ -1,0 +1,67 @@
+/*
+Parameters:
+  - $device: device name
+      : mobile, mobileh, tablet, laptop, desktop
+  - $sizes: less or greater than selected device, not only between!
+      : less (l), greater (g)
+  - $notIncludeStatus: not include the selected device
+      : notInclude (ni)
+
+  : if you write only a device and don't send other parameters, your code only shown in selected device!
+ */
+@mixin device($device, $size: false, $notIncludeStatus: false) {
+  $deviceList: map-get($devices, $device);
+  $minWidth: nth($deviceList, 1);
+  $maxWidth: false;
+  @if(length($deviceList) == 2) {
+    $maxWidth: nth($deviceList, 2);
+  }
+  $notInclude: $notIncludeStatus == notInclude or $notIncludeStatus == ni;
+  @if ($size) {
+    @if($size == less or $size == l) {
+      @if($maxWidth) {
+        @if($notInclude) {
+          @media (max-width: #{$minWidth}) {
+            @content
+          }
+        } @else {
+          @media (max-width: #{$maxWidth}) {
+            @content
+          }
+        }
+      } @else {
+        @if($notInclude) {
+          @media (max-width: #{$minWidth}) {
+            @content
+          }
+        } @else {
+          @content
+        }
+      }
+    } @else if ($size == greater or $size == g) {
+      @if($notInclude) {
+        @if($maxWidth) {
+          @media (min-width: #{$maxWidth}) {
+            @content
+          }
+        } @else {
+          @media (min-width: #{$minWidth}) {
+            @content
+          }
+        }
+      } @else {
+        @media (min-width: #{$minWidth}) {
+          @content
+        }
+      }
+    }
+  } @else {
+    @if($maxWidth) {
+      @media (min-width: #{$minWidth}) and (max-width: #{$maxWidth}) {
+        @content
+      }
+    } @else {
+      @content
+    }
+  }
+}

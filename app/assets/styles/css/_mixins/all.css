@@ -1,0 +1,13 @@
+/*
+Parameters:
+  - $device: device name
+      : mobile, mobileh, tablet, laptop, desktop
+  - $sizes: less or greater than selected device, not only between!
+      : less (l), greater (g)
+  - $notIncludeStatus: not include the selected device
+      : notInclude (ni)
+
+  : if you write only a device and don't send other parameters, your code only shown in selected device!
+ */
+
+/*# sourceMappingURL=all.css.map */

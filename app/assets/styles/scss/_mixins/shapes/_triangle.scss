@@ -1,0 +1,63 @@
+@mixin triangle($direction, $backgroundColor, $width, $height: null) {
+    width: 0;
+    height: 0;
+    @if $height == null {
+        $height : $width;
+    }
+    @if $direction == up {
+        @include border(
+                                (0, $width/2, $height, $width/2),
+                                (transparent, transparent, c($backgroundColor), transparent),
+                        solid
+        );
+    }
+    @else if $direction == right {
+        @include border(
+                                ($height, 0, $height, $width/2),
+                                (transparent, transparent, transparent, c($backgroundColor)),
+                        solid
+        );
+    }
+    @else if $direction == down {
+        @include border(
+                                ($height, $width/2, 0, $width/2),
+                                (c($backgroundColor), transparent, transparent, transparent),
+                        solid
+        );
+    }
+    @else if $direction == left {
+        @include border(
+                                ($height, $width/2, $height, 0),
+                                (transparent, c($backgroundColor), transparent, transparent),
+                        solid
+        );
+    }
+    @else if $direction == tl {
+        @include border(
+                                ($height, $width, 0, 0),
+                                (c($backgroundColor), transparent, transparent, transparent),
+                        solid
+        );
+    }
+    @else if $direction == tr {
+        @include border(
+                                ($height, 0, 0, $width),
+                                (c($backgroundColor), transparent, transparent, transparent),
+                        solid
+        );
+    }
+    @else if $direction == bl {
+        @include border(
+                                (0, $width, $height, 0),
+                                (transparent, transparent, c($backgroundColor), transparent),
+                        solid
+        );
+    }
+    @else if $direction == br {
+        @include border(
+                                (0, 0, $height, $width),
+                                (transparent, transparent, c($backgroundColor), transparent),
+                        solid
+        );
+    }
+}

@@ -1,0 +1,9 @@
+@function is-map($var){
+  @return type-of($var) == 'map';
+}
+@function is-list($var){
+  @return type-of($var) == 'list';
+}
+@function is-percentage($size){
+  @return str-search("#{$size}", "%");
+}

@@ -1,0 +1,18 @@
+@mixin hexagon($backgroundColor, $range){
+    @include relative();
+    @include rectangle($range, $range/2);
+    @include bgcolor($backgroundColor);
+    top: size-control($range/4);
+    &:before {
+        display: block;
+        content: '';
+        @include absolute((top: unquote("-"+$range/4), left: 0));
+        @include triangle(up, $backgroundColor, $range, $range/4);
+    }
+    &:after {
+        display: block;
+        content: '';
+        @include absolute((top: $range/2, left: 0));
+        @include triangle(down, $backgroundColor, $range, $range/4);
+    }
+}

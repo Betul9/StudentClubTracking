@@ -1,0 +1,3 @@
+@mixin pa($number){
+    padding: size-control($number);
+}

@@ -1,0 +1,67 @@
+$measureType: px;
+
+$colors: (
+    turquoise: #1abc9c,
+    darkturquoise: #16a085,
+    green: #2ecc71,
+    darkgreen: #27ae60,
+    blue: #3498db,
+    darkblue: #2980b9,
+    purple: #9b59b6,
+    darkpurple: #8e44ad,
+    asphalt: #34495e,
+    darkasphalt: #2c3e50,
+    yellow: #f1c40f,
+    darkyellow: #f39c12,
+    orange: #e67e22,
+    darkorange: #d35400,
+    red: #e74c3c,
+    darkred: #c0392b,
+    normal: #b2b3c4,
+    white: #fff,
+    grey: #828282,
+    black: #000,
+    bg: #F6F7FF,
+    borders: #B5B5B5,
+    main: #8083E7,
+    main-hover: #5C5FD2,
+    main-2: #FF718E,
+    main-2-hover: #f35272,
+    main-3: #FFB100,
+    main-3-hover: #d29400,
+    text: #565770,
+    cloud: #F6F7FF,
+    cloud-hover: #CACCE2,
+    cloud-text-light: #B1B2C2,
+    button-share: #FFB100,
+    button-google-calendar: #4086F4
+);
+$spaces: (0,5,10,15,20,25,30,35,40,45,50);
+$zindex: (10,9,8,7,6,5,4,3,2,1);
+
+$devices: (
+    'mobile': (0, 576px),
+    'mobileh': (576px, 768px),
+    'tablet': (768px, 992px),
+    'laptop': (992px, 1200px),
+    'desktop': (1200px)
+);
+$deviceKeys: (
+    'm': mobile,
+    'mh': mobileh,
+    't': tablet,
+    'l': laptop
+);
+
+$container: 1200px;
+
+:root {
+  --transition-ms: 300ms;
+  --font-family: 'Quicksand', sans-serif;
+  --border-radius: 4px;
+  --box-shadow: 0px 3px 6px 0px rgba(0,0,0,0.2);
+  --box-shadow-hover: 0px 4px 8px 0px rgba(0,0,0,0.25);
+  @each $key, $value in $colors {
+    --color-#{$key}: #{$value};
+  }
+}

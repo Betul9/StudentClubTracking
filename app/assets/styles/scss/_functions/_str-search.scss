@@ -1,0 +1,7 @@
+@function str-search($string,$var) {
+    $index: str-index($string,$var);
+    @if ($index == null) {
+        @return false;
+    }
+    @return $index;
+}

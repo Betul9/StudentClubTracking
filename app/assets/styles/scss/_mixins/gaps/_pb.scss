@@ -1,0 +1,3 @@
+@mixin pb($number){
+    padding-bottom: size-control($number);
+}

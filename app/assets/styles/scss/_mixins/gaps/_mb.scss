@@ -1,0 +1,3 @@
+@mixin mb($number){
+    margin-bottom: size-control($number);
+}

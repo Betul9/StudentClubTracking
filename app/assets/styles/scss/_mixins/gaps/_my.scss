@@ -1,0 +1,4 @@
+@mixin my($number){
+    margin-top: size-control($number);
+    margin-bottom: size-control($number);
+}

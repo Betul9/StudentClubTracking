@@ -1,0 +1,4 @@
+@mixin rectangle($width, $height) {
+    width: size-control($width);
+    height: size-control($height);
+}

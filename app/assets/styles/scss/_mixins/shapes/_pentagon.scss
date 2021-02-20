@@ -1,0 +1,11 @@
+@mixin pentagon($backgroundColor, $range){
+    @include relative();
+    margin-top: size-control($range*3/5);
+    @include trapezoid(down, $backgroundColor, $range, ($range - $range*2/5), $range*2.5/5);
+    &:before {
+        display: block;
+        content: '';
+        @include absolute((top: unquote("-"+$range), left: unquote("-"+$range*2/10)));
+        @include triangle(up, $backgroundColor, $range, $range*2.5/5);
+    }
+}

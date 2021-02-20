@@ -1,0 +1,3 @@
+@mixin transition($el: all, $ms: var(--transition-ms)) {
+  transition: $el $ms;
+}

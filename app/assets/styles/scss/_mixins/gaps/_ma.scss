@@ -1,0 +1,3 @@
+@mixin ma($number){
+    margin: size-control($number);
+}

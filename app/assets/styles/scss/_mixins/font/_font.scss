@@ -1,0 +1,7 @@
+@mixin font($weight, $size, $lineHeight: false, $ff: var(--font-family)) {
+  @if($lineHeight) {
+    font: $weight size-control($size)/size-control($lineHeight) $ff
+  } @else {
+    font: $weight size-control($size) $ff
+  }
+}

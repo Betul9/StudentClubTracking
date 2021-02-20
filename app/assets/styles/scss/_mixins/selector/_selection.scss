@@ -1,0 +1,20 @@
+@mixin selection($color: false, $backgroundColor: false) {
+    &::-moz-selection {
+        @if $color {
+            @include color($color);
+        }
+        @if $backgroundColor {
+            @include bgcolor($backgroundColor);
+        }
+        @content;
+    }
+    &::selection {
+        @if $color {
+            @include color($color);
+        }
+        @if $backgroundColor {
+            @include bgcolor($backgroundColor);
+        }
+        @content;
+    }
+}

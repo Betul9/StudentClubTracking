@@ -1,0 +1,19 @@
+@mixin m($top, $right: false, $bottom: false, $left: false) {
+    @if $right == false {
+        @include ma($top);
+    }
+    @if $bottom == false {
+        @include my($top);
+        @include mx($right);
+    }
+    @if $left == false {
+        @include mt($top);
+        @include mb($bottom);
+        @include mx($right);
+    } @else {
+        @include mt($top);
+        @include mr($right);
+        @include mb($bottom);
+        @include ml($left);
+    }
+}

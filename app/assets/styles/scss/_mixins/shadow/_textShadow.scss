@@ -1,0 +1,24 @@
+@mixin textShadow($map: ()){
+    $x: 0;
+    $y: 0;
+    $distance: 0;
+    $blur: 5;
+    $color: #000;
+    $opacity: .25;
+
+    @if map_has_key($map, distance) {$distance: map-get($map, distance);}
+    @if map_has_key($map, blur) {$blur: map-get($map, blur);}
+    @if map_has_key($map, color) {$color: map-get($map, color);}
+    @if map_has_key($map, opacity) {$opacity: map-get($map, opacity);}
+
+    @if map_has_key($map, coord) {
+        @if(map-get($map, coord) == "top") {$x : 0; $y : (-$distance);}
+        @else if(map-get($map, coord) == "right") {$x : $distance; $y : 0;}
+        @else if(map-get($map, coord) == "bottom") {$x : 0; $y : $distance;}
+        @else if(map-get($map, coord) == "left") {$x : (-$distance); $y : 0;}
+    }
+
+    $rgba: c($color, $opacity);
+
+    text-shadow: $x+$mu $y+$mu $blur+$mu $rgba;
+}

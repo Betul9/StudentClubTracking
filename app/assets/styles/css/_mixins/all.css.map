@@ -1,0 +1,7 @@
+{
+"version": 3,
+"mappings": "AAAA;;;;;;;;;;GAUG",
+"sources": ["../../scss/_mixins/responsive/_device.scss"],
+"names": [],
+"file": "all.css"
+}

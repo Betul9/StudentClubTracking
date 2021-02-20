@@ -1,0 +1,36 @@
+@mixin shadow($vertical: false, $horizontal: false, $blur: false, $spread: false, $color: false, $opacity: false, $v: false, $h: false, $b: false, $s: false, $c: false, $o: false){
+    @if $vertical or $v {
+        $vertical: size-control(select-non-false($vertical, $v));
+    } @else {
+        $vertical: 0
+    }
+    @if $horizontal or $h {
+        $horizontal: size-control(select-non-false($horizontal, $h));
+    } @else {
+        $horizontal: 0
+    }
+    @if $blur or $b {
+        $blur: size-control(select-non-false($blur, $b));
+    } @else {
+        $blur: 5
+    }
+    @if $spread or $s {
+        $spread: size-control(select-non-false($spread, $s));
+    } @else {
+        $spread: 5
+    }
+    @if $color or $c {
+        @if $opacity or $o {
+            $opacity: select-non-false($opacity, $o);
+        } @else {
+            $opacity: .25;
+        }
+        $color: c(select-non-false($color, $c), $opacity);
+    } @else {
+        $color: c(black, $opacity);
+    }
+
+    -webkit-box-shadow: $horizontal $vertical $blur $spread $color;
+    -moz-box-shadow: $horizontal $vertical $blur $spread $color;
+    box-shadow: $horizontal $vertical $blur $spread $color;
+}

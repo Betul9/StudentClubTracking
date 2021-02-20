@@ -1,0 +1,7 @@
+@function c($rootKey, $opacity: 1) {
+  @if($opacity == 1) {
+    @return var(--color-#{$rootKey})
+  } @else {
+    @return rgba(map-get($colors, $rootKey), $opacity);
+  }
+}

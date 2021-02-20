@@ -1,0 +1,1195 @@
+@import "_root";
+@import "_functions/all";
+@import "_mixins/all";
+@import "_core";
+
+// variables
+$headerHeight: 84px;
+$searchWidth: 615px;
+$searchGap: 15px;
+$filtersMaxHeight: 336px;
+// ## variables
+
+// General
+.title-area {
+  @include flex($ai: center, $jc: space-between);
+  @include mb(20);
+  &-text {
+    @include font(700, 24);
+    @include color(main);
+  }
+  &-button {
+    @include height(36);
+    @include px(20);
+    @include stdBorderRadius();
+    @include bgcolor(main);
+    @include grid(1fr 16px, $ai: center);
+    @include color(white);
+    span {
+      @include firstChild() {
+        @include font(600, 14);
+      }
+      @include lastChild() {
+        @include ml(10);
+        @include icon(14, white);
+      }
+    }
+  }
+}
+.divider {
+  @include rectangle(100%, 30);
+}
+.loading {
+  $size: 28;
+  $weight: 2;
+  @include iblock();
+  @include square($size);
+  @include after() {
+    @include block();
+    @include square($size - ($weight * 2));
+    @include brad(50%);
+    border-width: size-control($weight);
+    border-style: solid;
+    border-color: #fff transparent #fff transparent;
+    animation: loadingAnimation 1.2s linear infinite;
+  }
+  @keyframes loadingAnimation {
+    0% {
+      transform: rotate(0deg);
+    }
+    100% {
+      transform: rotate(360deg);
+    }
+  }
+}
+.more {
+  @include mt(30);
+  @include rectangle(100%, 48);
+  @include bgcolor(main);
+  @include color(white);
+  @include stdBorderRadius();
+  @include stdBoxShadow();
+  @include align(center);
+  @include flex($ai: center, $jc: center);
+  @include font(600, 16);
+  @include click();
+  @include transition();
+  &:not(.loading):hover {
+    @include bgcolor(main-hover);
+  }
+  &.loading {
+    @include opacity(.5);
+  }
+}
+// ## General
+
+.sticky-header {
+  @include sticky($top: 0);
+  @include z(3);
+}
+.header {
+  @include height($headerHeight);
+  &-bg {
+    @include height($headerHeight);
+    @include bgcolor(white);
+    @include stdBoxShadow();
+  }
+  @include flex($ai: center, $jc: space-between);
+  .logo {
+    @include rectangle(100, 40);
+    @include mr(20);
+  }
+  .search {
+    $searchHeight: $headerHeight - ($searchGap * 2);
+    @include flex($ai: center);
+    @include rectangle($searchWidth, $searchHeight);
+    @include bgcolor(cloud);
+    @include stdBorderRadius();
+    @include pl(30);
+    @include pr(10);
+    @include device(mobileh, g, ni) {
+      @include mr(20);
+    }
+    label {
+      width: 100%;
+    }
+    input {
+      width: 100%;
+      height: $searchHeight;
+      @include color(text);
+      @include font(400, 16);
+      @include placeholder() {
+        @include color(cloud-text-light);
+      }
+    }
+    button {
+      width: $searchHeight;
+      @include icon(24, cloud-text-light);
+      @include center();
+    }
+  }
+  .social-media {
+    @include device(mobileh, l) {
+      @include none();
+    }
+    @include flex($ai: center);
+    a {
+      @include flexGap(5);
+      @include hover() {
+        @include scale(1.2);
+      }
+      span {
+        @include icon(24, cloud-text-light);
+      }
+    }
+  }
+}
+.footer {
+  @include mt(30);
+  padding-top: 30px !important;
+  padding-bottom: 30px !important;
+  @include grid(2fr 2.5fr 1fr, 40);
+  @include device(tablet, l) {
+    @include grid(1, 20);
+    @include align(center);
+  }
+  &-bg {
+    @include bgcolor(main);
+    @include stdBoxShadow();
+  }
+  &-copyright {
+    @include device(tablet, l) {
+      @include pb(15);
+      border-bottom: 1px solid c(white, .25);
+    }
+    .subscribe {
+      @include height(56);
+      @include bgcolor(white);
+      @include stdBorderRadius();
+      @include stdBoxShadow();
+      @include flex($ai: center);
+      label {
+        @include width(100%);
+      }
+      input {
+        width: calc(100% - 20px);
+        @include height(56);
+        @include px(10);
+        @include font(600, 14);
+        @include color(text);
+        @include placeholder() {
+          @include color(cloud-text-light);
+        }
+      }
+      button {
+        @include height(36);
+        @include stdBorderRadius();
+        @include px(10);
+        @include mr(10);
+        @include font(600, 16);
+        @include bgcolor(main);
+        @include color(white);
+        white-space: nowrap;
+      }
+    }
+    .logo {
+      @include mt(20);
+    }
+    .text {
+      @include font(600, 14);
+      @include color(white);
+    }
+  }
+  &-menu {
+    @include grid(1fr 1fr 1fr, 30);
+    @include device(mobileh, l) {
+      @include grid(1, 25);
+      @include order(3);
+    }
+    &-box {
+      .title {
+        @include font(600, 18);
+        @include color(white);
+        @include mb(10);
+        @include oneLineText();
+      }
+      ul li a {
+        @include font(400, 16, 36);
+        @include color(white, .75);
+        &:before {
+          content: '› ';
+        }
+        @include hover() {
+          @include color(white);
+        }
+      }
+    }
+  }
+  &-right {
+    .social-media {
+      @include align(right);
+      @include mb(15);
+      @include flex($jc: flex-end);
+      @include device(tablet, l) {
+        justify-content: center;
+      }
+      a {
+        @include flexGap(8);
+        @include block();
+        @include hover() {
+          @include scale(1.2);
+        }
+        span {
+          @include icon(30, cloud);
+        }
+      }
+    }
+    .language {
+      $selectHeight: 44;
+      @include relative();
+      @include z(3);
+      @include rectangle(100%, $selectHeight);
+      @include bgcolor(white);
+      @include stdBorderRadius();
+      select {
+        all: unset;
+        @include relative();
+        width: calc(100% - 15px);
+        @include height($selectHeight);
+        @include pl(15);
+        @include font(600, 16, $selectHeight);
+        @include color(main);
+        @include z(1);
+        @include click();
+      }
+
+      span {
+        @include absolute($top: 15px, $right: 15px);
+        @include z(2);
+        @include rotate(90);
+        @include icon(18, main);
+      }
+    }
+  }
+}
+
+.filters {
+  $filtersGap: 30px;
+  $filtersBottomSpace: 40px;
+  @include relative();
+  @include my($filtersGap);
+  &-bg {
+    @include relative($z: 8);
+    @include height($filtersMaxHeight - $filtersGap - $filtersBottomSpace);
+    @include bgcolor(main);
+    @include stdBorderRadius();
+    @include mb(($filtersGap * 2) + 24);
+    @include device(desktop, l, ni) {
+      @include none();
+    }
+  }
+  &-content {
+    @include absolute($top: 0, $left: 0, $z: 8);
+    @include pt(20);
+    @include px(40);
+    @include width(100%);
+    @include flex($jc: space-between);
+    @include device(desktop, l, ni) {
+      @include flexDirection(c);
+      @include bgcolor(main);
+      @include stdBorderRadius();
+      @include relative();
+    }
+    @include device(tablet, l, ni) {
+      @include px(20);
+    }
+    &-left {
+      @include device(desktop, l, ni) {
+        @include center();
+        @include flexDirection(c);
+        @include align(center);
+      }
+      .title {
+        @include font(400, 32);
+        @include color(white);
+        strong {
+          font-weight: 700;
+        }
+      }
+      .buttons {
+        button {
+          @include rectangle(120, 44);
+          @include mt(10);
+          @include bgcolor(white);
+          @include stdBorderRadius();
+          @include color(main);
+          @include flex($ai: center);
+          @include px(15);
+          @include hover(none) {
+            span {
+              @include firstChild() {
+                @include scale(1.2);
+              }
+            }
+          }
+          span {
+            @include firstChild() {
+              @include icon(24, main);
+              @include mr(10);
+              @include transition();
+            }
+            @include lastChild() {
+              @include width(100%);
+              @include font(400, 16);
+              @include color(main);
+              @include device(desktop, l, ni) {
+                @include align(center);
+              }
+            }
+          }
+        }
+      }
+    }
+    &-right {
+      @include grid(240px 340px, 20);
+      @include device(desktop, l, ni) {
+        @include gridCenter();
+        @include my(30);
+      }
+      @include device(tablet, l, ni) {
+        @include grid(1, 20);
+      }
+    }
+  }
+  &-title {
+    @include center();
+    @include color(main);
+    @include font(700, 16);
+  }
+  &-types, &-calendar {
+    @include height($filtersMaxHeight);
+    @include bgcolor(white);
+    @include stdBorderRadius();
+    @include stdBoxShadow();
+    @include pa(10);
+  }
+  &-types-content {
+    @include mt(10);
+    @include px(10);
+    @include height($filtersMaxHeight - $filtersGap - 25px);
+    li {
+      @include color(text);
+      @include click();
+      @include font(600, 14, 40);
+      @include hover() {
+        @include color(main);
+      }
+    }
+  }
+  &-calendar {
+    &-top {
+      @include center();
+      @include mt(2);
+      span {
+        @include width(36);
+        @include icon(18, main);
+        @include click();
+        @include firstChild() {
+          @include rotate(180);
+        }
+      }
+      .calendar-title {
+        @include width(100%);
+        @include align(center);
+        div {
+          @include firstChild() {
+            @include font(700, 16, 18);
+            @include color(main);
+          }
+          @include lastChild() {
+            @include font(700, 14, 14);
+            @include color(main, .5);
+          }
+        }
+      }
+    }
+    &-content {
+      $daySize: 40px;
+      @include mt(10);
+      @include grid(repeat(7, $daySize), 6);
+      @include gridCenter();
+      @include device(tablet, l, ni) {
+        @include grid(7, 6);
+      }
+      .day {
+        @include square($daySize);
+        @include device(tablet, l, ni) {
+          @include width(100%);
+        }
+        @include center();
+        @include stdBorderRadius();
+        @include bgcolor(cloud);
+        @include color(cloud-text-light);
+        @include font(400, 16);
+        @include click();
+        @include hover() {
+          @include bgcolor(text);
+          @include color(white);
+        }
+        &.active {
+          @include bgcolor(main);
+          @include color(white);
+          font-weight: 700;
+        }
+        &.passive {
+          @include opacity(.5);
+        }
+      }
+    }
+  }
+}
+.filter-page {
+  @include mt(30);
+  @include flex($ai: flex-start);
+  &-sidebar {
+    $mobileHeight: 70%;
+    @include device(laptop, l) {
+      @include transition();
+      @include fixed($b: -100%, $l: 0, $z: 3);
+      width: 100%;
+      height: $mobileHeight;
+      @include bgcolor(white);
+      @include borderRadius(top, 12);
+      @include shadow(-3, 0, 12, 0, black, .5);
+      overflow-y: auto;
+      @include scrollbar(0);
+      @include pa(0);
+    }
+    &.active {
+      @include bottom(0);
+      .filter-page-sidebar-close-line {
+        @include bottom(0);
+      }
+      .filter-page-sidebar-button {
+        @include none();
+      }
+    }
+    $space: 10;
+    @include width(250);
+    @include mr(30);
+    @include pa($space);
+    @include bgcolor(white);
+    @include stdBoxShadow();
+    @include stdBorderRadius();
+    &-area {
+      @include pb(15);
+      @include mb(15);
+      border-bottom: 1px solid c(cloud-hover);
+      @include lastChild() {
+        border: 0;
+        @include pb(0);
+        @include mb(0);
+      }
+    }
+    &-title {
+      @include font(700, 16, 22);
+      @include color(main);
+      @include mb(5);
+    }
+    &-list {
+      @include block();
+      @include font(400, 14, 28);
+      @include color(text);
+      &.scrollbar-y {
+        @include maxHeight(250);
+      }
+      li {
+        @include click();
+        &.active {
+          font-weight: 700;
+          @include color(main);
+        }
+        @include transition();
+        &:not(.active):hover {
+          @include color(main-hover);
+        }
+        label {
+          @include click();
+          @include flex($ai: center);
+          input {
+            display: none;
+          }
+          input:checked + .checkbox-area {
+            @include color(main);
+            font-weight: 700;
+            & + .checkbox-text {
+              @include color(main);
+              font-weight: 700;
+            }
+            & > .icon {
+              visibility: visible;
+              @include opacity(1);
+              @include transition()
+            }
+          }
+          .checkbox-area {
+            @include square(18);
+            @include mr(5);
+            border: 1px solid c(borders);
+            @include stdBorderRadius();
+            @include flex($ai: center, $jc: center);
+            .icon {
+              visibility: hidden;
+              @include opacity(0);
+              @include icon(10);
+            }
+          }
+        }
+      }
+    }
+    &-content {
+      @include device(laptop, l) {
+        @include py($space);
+        @include pl($space);
+        @include mr($space + 48);
+        .scrollbar-y {
+          max-height: none;
+        }
+      }
+    }
+    &-button {
+      @include none();
+      @include device(laptop, l) {
+        @include click();
+        @include block();
+        @include fixed($bottom: 10, $right: 10, $z: 5);
+        @include bgcolor(main);
+        @include color(white);
+        @include flex($ai: center);
+        @include height(36);
+        @include px(20);
+        @include brad(18);
+        @include stdBoxShadow();
+        .icon {
+          @include mr(10);
+        }
+        .text {
+          @include font(700, 16);
+        }
+      }
+    }
+    &-close-line {
+      @include none();
+      @include device(laptop, l) {
+        @include transition();
+        @include click();
+        @include block();
+        @include fixed($bottom: -100%, $right: 0);
+        @include width(48);
+        @include height($mobileHeight);
+        @include bgcolor(main);
+        .icon {
+          @include rotate(90);
+          @include mt(0);
+          @include height(48);
+          @include bgcolor(main-hover);
+          @include center();
+          span {
+            @include icon(24, white);
+          }
+        }
+        .text {
+          writing-mode: tb-rl;
+          @include font(700, 24, 48);
+          @include color(white);
+          @include absolute($bottom: 20, $left: 0);
+        }
+      }
+    }
+  }
+  &-content {
+    flex: 1;
+  }
+  &-top {
+    @include mb(20);
+    &-row {
+      @include flex($ai: center);
+      @include height(28);
+      span {
+        @include font(400, 16);
+        @include color(text);
+        @include opacity(.5);
+        @include firstChild () {
+          @include minWidth(100);
+          @include mr(10);
+        }
+        @include lastChild () {
+          flex: 1;
+          @include ml(10);
+          @include font(600, 16);
+          @include opacity(1);
+        }
+      }
+    }
+  }
+}
+
+.page {
+  @include py(30);
+  @include device(desktop, l, ni) {
+    @include pt(0);
+  }
+}
+.event-page {
+  @include mt(40);
+  &-title {
+    @include font(700, 30, 44);
+    @include color(text);
+    @include mb(20);
+    @include align(center);
+  }
+  &-container {
+    @include grid(1fr 350px, 30);
+    @include device(tablet, l) {
+      @include grid(1, 30);
+    }
+    .content {
+      @include device(tablet, l) {
+        @include order(2);
+      }
+      &-cover {
+        img {
+          @include width(100%);
+          @include stdBorderRadius();
+        }
+      }
+      &-area {
+        @include font(500, 16, 28);
+        @include color(text);
+      }
+    }
+    .sidebar {
+      @include device(tablet, l) {
+        @include order(1);
+      }
+      .std {
+        @include stdBoxShadow();
+        @include pa(20);
+        @include stdBorderRadius();
+        @include bgcolor(white);
+      }
+      .box {
+        &-rows {
+          @include grid(1, 15);
+        }
+        &-title {
+          @include font(600, 14);
+          @include color(cloud-text-light);
+        }
+        &-content {
+          @include font(600, 16);
+          @include color(text);
+        }
+        &-divider {
+          @include rectangle(100%, 2);
+          @include brad(1);
+          @include bgcolor(cloud);
+          @include my(20);
+        }
+        &-buttons {
+          @include flex();
+        }
+        &-button {
+          @include grid(18px 1fr, 5);
+          @include gridCenter();
+          @include height(28);
+          @include px(10);
+          @include stdBorderRadius();
+          @include flexGap(10);
+          @include opacity(.9);
+          @include hover() {
+            @include opacity(1);
+          }
+          .icon {
+            @include icon(16, white);
+          }
+          .text {
+            @include font(600, 14);
+            @include color(white);
+          }
+          &[data-type="share"] {
+            @include bgcolor(button-share);
+          }
+          &[data-type="google-calendar"] {
+            @include bgcolor(button-google-calendar);
+          }
+        }
+      }
+      .one-info-box {
+        @include mt(20);
+        @include before() {
+          @include block();
+          @include rectangle(100%, 10);
+          @include brad(5);
+          @include mb(15);
+        }
+        &[data-color="pink"]:before {
+          @include bgcolor(main-2);
+        }
+        &[data-color="yellow"]:before {
+          @include bgcolor(main-3);
+        }
+        .content-area {
+          @include grid(24px 1fr, 15);
+          @include gridCenter();
+          .icon {
+            @include icon(24, cloud-text-light);
+          }
+          .content {
+            .title {
+              @include font(600, 14, 18);
+              @include color(cloud-text-light);
+            }
+            .content {
+              @include font(600, 16, 20);
+              @include color(text);
+            }
+          }
+        }
+      }
+      .one-form-button {
+        @include click();
+        @include mt(20);
+        @include bgcolor(main-3);
+        @include stdBorderRadius();
+        @include pa(20);
+        @include flex($ai: center);
+        @include hover() {
+          @include scale(1.05);
+        }
+        .icon {
+          @include mr(15);
+          @include icon(32, white);
+        }
+        .form-title-area {
+          @include color(white);
+          &-title {
+            @include font(600, 18);
+          }
+          &-content {
+            @include font(400, 12);
+          }
+        }
+      }
+    }
+  }
+}
+
+.events-area {
+  @include grid(3, 20);
+  @include device(tablet, l) {
+    @include grid(2, 15);
+  }
+  @include device(mobileh, l) {
+    @include grid(1, 15);
+  }
+}
+.event-box {
+  $imageHeight: 150px;
+  @include stdBorderRadius();
+  @include bgcolor(white);
+  @include stdBoxShadow();
+  @include pa(10);
+  @include hover() {
+    @include scale(1.05);
+  }
+  .image-area {
+    @include rectangle(100%, $imageHeight);
+    @include stdBorderRadius();
+    @include oHidden();
+    img {
+      @include rectangle(100%, $imageHeight);
+      object-fit: cover;
+    }
+  }
+  .content {
+    @include mt(10);
+    .date {
+      @include font(600, 14);
+      @include mb(5);
+      @include color(main);
+    }
+    .title {
+      @include font(600, 16);
+      @include color(text);
+    }
+    .university {
+      @include bgcolor(cloud);
+      @include mt(10);
+      @include py(5);
+      @include pl(5);
+      @include pr(15);
+      @include stdBorderRadius();
+      @include iGrid(44px 1fr, 10, $ai: center);
+      @include hover() {
+        @include bgcolor(cloud-hover);
+        @include color(white);
+      }
+      .logo {
+        @include bgcolor(white);
+        @include pa(5);
+        @include stdBorderRadius();
+        img {
+          @include width(100%);
+          @include center();
+        }
+      }
+      &-info {
+        @include color(text);
+        @include font(400, 14, 16);
+        strong {
+          @include font(700, 14, 16);
+          @include block();
+        }
+      }
+    }
+  }
+}
+
+.universities-area {
+  @include mt(30);
+  @include grid(8, 40);
+  @include device(tablet, l) {
+    @include grid(5, 30);
+  }
+  @include device(mobile, l) {
+    @include grid(3, 30);
+  }
+  img {
+    width: 100%;
+    @include hover() {
+      @include scale(1.05);
+    }
+  }
+}
+.university {
+  &-page {
+    $bigImageHeight: 200;
+    .university-big-image {
+      @include relative();
+      @include height($bigImageHeight);
+      @include oHidden();
+      &-bg {
+        @include absolute($top: 0, $left: 0);
+        @include rectangle(100%, $bigImageHeight);
+        img {
+          @include rectangle(100%, $bigImageHeight);
+          object-fit: cover;
+          @include grayscale();
+          @include opacity(.25);
+        }
+      }
+      &-normal {
+        @include relative($z: 9);
+        @include rectangle(100%, $bigImageHeight);
+        img {
+          @include rectangle(100%, $bigImageHeight);
+          object-fit: cover;
+        }
+      }
+      .container {
+        @include device(tablet, l) {
+          @include pa(0);
+        }
+      }
+    }
+    &-top {
+      @include my(30);
+      @include flex($ai: center, $jc: space-between);
+      @include device(tablet, l) {
+        @include flexDirection(c);
+      }
+      .logo-area {
+        @include flex($ai: center);
+        @include device(tablet, l) {
+          @include flexDirection(c);
+          @include align(center);
+        }
+        img {
+          @include square(60);
+        }
+        .title {
+          @include device(tablet, l) {
+            @include ml(0);
+            @include mt(20);
+          }
+          @include ml(20);
+          @include color(text);
+          div {
+            @include firstChild() {
+              @include font(600, 24, 24);
+            }
+            @include lastChild() {
+              @include font(400, 24, 24);
+            }
+          }
+        }
+      }
+      .statistics {
+        @include device(tablet, l) {
+          @include mt(30);
+          @include width(100%);
+        }
+        @include flex($ai: center, $jc: center);
+        &-box {
+          @include device(mobile, l) {
+            flex: 1;
+            @include ml(0);
+          }
+          @include ml(60);
+          @include color(text);
+          @include align(center);
+          @include firstChild() {
+            @include ml(0);
+          }
+          div {
+            @include firstChild() {
+              @include font(400, 16, 24);
+              @include device(mobileH, l) {
+                @include font(400, 12, 16);
+              }
+            }
+            @include lastChild() {
+              @include font(700, 36, 36);
+              @include device(mobileH, l) {
+                @include font(700, 24, 24);
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}
+
+.popup {
+  &.hide {
+    visibility: hidden;
+    @include opacity(0);
+  }
+  @include opacity(1);
+  visibility: visible;
+  @include fixed($top: 0, $left: 0, $z: 1);
+  @include width(100%);
+  height: 100vh;
+  @include flex($ai: center, $jc: center);
+  &-bg {
+    @include fixed($top: 0, $left: 0, $z: 2);
+    @include width(100%);
+    height: 100vh;
+    @include bgcolor(black, .25);
+  }
+  &-area {
+    @include relative($z: 1);
+    @include bgcolor(white);
+    @include stdBorderRadius();
+    @include stdBoxShadow();
+    @include py(20);
+    @include pl(20);
+    @include pr(10);
+    @include transition();
+    &.scale {
+      transform: scale(1.1);
+    }
+    &.mini {
+      @include width(500);
+      @include device(mobile, l) {
+        width: calc(100% - 40px);
+      }
+    }
+    &.big {
+      @include width($container);
+      @include device(laptop, l) {
+        width: calc(100% - 40px);
+      }
+    }
+    &.full {
+      width: calc(100% - 100px);
+      @include device(laptop, l) {
+        width: calc(100% - 40px);
+      }
+    }
+    .popup-container {
+      @include pr(10);
+      max-height: calc(100vh - 100px);
+      overflow-y: auto;
+      overflow-x: hidden;
+      @include scrollbar();
+      @include font(400, 16, 24);
+    }
+  }
+}
+
+// forms
+.participation-form {
+  .title {
+    @include color(main-3);
+    @include font(700, 24);
+    @include mb(25);
+  }
+  label {
+    @include block();
+    @include mb(20);
+    .label-title {
+      @include block();
+      @include font(700, 14, 20);
+      @include color(text);
+      @include mb(5);
+    }
+    input {
+      @include block();
+      width: calc(100% - 40px);
+      height: 48px;
+      border: 1px solid c(borders);
+      @include px(20);
+      @include font(400, 16);
+      @include color(text);
+      @include stdBorderRadius();
+      @include placeholder() {
+        @include color(cloud-text-light)
+      }
+    }
+  }
+  button {
+    @include block();
+    margin: 0 auto;
+    @include rectangle(220, 48);
+    @include stdBorderRadius();
+    @include bgcolor(main-3);
+    @include color(white);
+    @include font(700, 18, 48);
+    @include align(center);
+    @include hover() {
+      @include bgcolor(main-3-hover);
+    }
+  }
+}
+
+.event-page-container .sidebar .box-button .text, .text-popover {
+  font: 600 14px var(--font-family);
+  color: var(--color-white);
+  position: relative;
+}
+
+.event-page-container .sidebar .box-button .text-popover .popover-content {
+  display: flex;
+  align-items: center;
+  visibility: hidden;
+  position: absolute;
+  transform: translate(0, 10px);
+  left: -34px;
+  background-color: #fff;
+  color: #f1c40f;
+  font-size: 25px;
+  border-radius: 5px;
+  padding: 5px 10px 5px 10px;
+  transition-duration: 0.3s;
+  width: auto;
+}
+
+.event-page-container .sidebar .box-button .text-popover .popover-content span {
+  margin-right: 10px;
+}
+
+.event-page-container .sidebar .box-button .text-popover .popover-content span:last-child {
+  margin-right: 0;
+}
+
+.event-page-container .sidebar .box-button[data-type="share"]:hover .popover-content {
+  opacity: 1;
+  z-index: 2;
+  visibility: visible;
+  border: 1px solid #f1c40f;
+}
+
+.event-page-container .sidebar .box-button .text-popover .popover-content[tooltip-position="top"] {
+  transform: translate(0, -68px);
+}
+
+.event-page-container .sidebar .box-button .text-popover .popover-content[tooltip-position="bottom"] {
+  transform: translate(0, 15px);
+}
+
+.event-page-container .sidebar .box-button .text-popover .popover-content[tooltip-position="right"] {
+  transform: translate(98px, -23px);
+}
+
+.event-page-container .sidebar .box-button .text-popover .popover-content[tooltip-position="left"] {
+  transform: translate(-159px, -23px);
+}
+
+.event-page-container .sidebar .box-button .text-popover .popover-content:before {
+  position: absolute;
+  opacity: 1;
+  z-index: 2;
+  content: " ";
+  border-color: transparent transparent #f1c40f transparent;
+}
+
+.event-page-container .sidebar .box-button .text-popover .popover-content[tooltip-position="top"]:before {
+  border-left: 6px solid transparent;
+  border-right: 6px solid transparent;
+  border-top: 6px solid #f1c40f;
+  top: 35px;
+}
+
+.event-page-container .sidebar .box-button .text-popover .popover-content[tooltip-position="bottom"]:before {
+  border-left: 6px solid transparent;
+  border-right: 6px solid transparent;
+  border-bottom: 6px solid #f1c40f;
+  bottom: 35px;
+}
+
+.event-page-container .sidebar .box-button .text-popover .popover-content[tooltip-position="right"]:before {
+  border-top: 6px solid transparent;
+  border-bottom: 6px solid transparent;
+  border-right: 6px solid #f1c40f;
+  left: -7px;
+  top: 5px;
+}
+
+.event-page-container .sidebar .box-button .text-popover .popover-content[tooltip-position="left"]:before {
+  border-top: 6px solid transparent;
+  border-bottom: 6px solid transparent;
+  border-left: 6px solid #f1c40f;
+  right: -7px;
+  top: 5px;
+}
+
+.event-page-container .sidebar .box-button[data-type="google-calendar"] {
+  background-color: var(--color-button-google-calendar);
+  z-index: 1;
+}
+
+.page {
+  &-title {
+    @include font(700, 30, 44);
+    @include color(text);
+    @include mb(20);
+    @include align(start);
+  }
+  .content {
+    &-cover {
+      img {
+        @include width(100%);
+        @include stdBorderRadius();
+        @include stdBoxShadow();
+      }
+    }
+    &-area {
+      @include font(500, 16, 28);
+      @include color(text);
+    }
+  }
+}
+// ## forms
